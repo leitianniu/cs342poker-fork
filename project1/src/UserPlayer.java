@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class UserPlayer{
 	
@@ -26,20 +27,30 @@ public class UserPlayer{
 			                    "discard the other four cards");
 		}
 	}
-	public static void discard_draw(List<Card> player_hand){
+	public static void discard_draw(List<Card> player_hand, CardPile deck, CardPile discardpile){
 		int numToDiscard = -1;
 		int[] cardsToDiscard = new int[4];
 		
 		Scanner in = new Scanner(System.in);
+		Pattern delimiters = Pattern.compile(System.getProperty("line.separator")+"|\\s");
+		in.useDelimiter(delimiters); 
 		System.out.println("List the cards numbers you wish to discard. > ");
+		System.out.println("(enter each card number followed by a space, or hit enter twice)");
 		while(in.hasNextInt()){
 			numToDiscard++;
 			cardsToDiscard[numToDiscard] = in.nextInt();
-			System.out.println("Discarding ");
-			player_hand.get(cardsToDiscard[numToDiscard]).printCard();
-			System.out.print("\n");
+			player_hand.get(cardsToDiscard[numToDiscard] - 1).printCard();
+			// remove from hand
+			//player_hand.remove(cardsToDiscard[numToDiscard] - 1);
+			discardpile.insert_card(player_hand.remove(cardsToDiscard[numToDiscard] - 1));
 		}
-		
-		
+		System.out.print("are discarded\n");
+		// draw cards to fill hand
+		for(int i=0;i<numToDiscard;i++){
+			player_hand.add(deck.drawCard());
+			top_of_deck++;
+		}
+		// print out player hand again
+		print_phand(player_hand);
 	}
 }

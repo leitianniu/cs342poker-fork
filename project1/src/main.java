@@ -74,7 +74,7 @@ public class main{
    		AIPlayer.checkpairs(ai_hand);
 
      	// Player Discard card
-   		UserPlayer.discard_draw(player_hand);
+   		UserPlayer.discard_draw(player_hand, deck, discardpile);
    		
    		
         //int ans = 'A' + 'K' + 'Q' + 'J' + 'T' = 379;
