@@ -32,8 +32,7 @@ public class UserPlayer{
 		
 		Scanner in = new Scanner(System.in);
 		System.out.println("List the cards numbers you wish to discard. > ");
-		while(!in.hasNextInt()){
-			in.next();
+		while(in.hasNextInt()){
 			numToDiscard++;
 			cardsToDiscard[numToDiscard] = in.nextInt();
 			System.out.println("Discarding ");
