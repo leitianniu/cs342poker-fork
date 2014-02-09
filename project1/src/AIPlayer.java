@@ -76,8 +76,8 @@ public class AIPlayer{
 		Scanner in = new Scanner(ai_discard);
 		Pattern delimiters = Pattern.compile(System.getProperty("line.separator")+"|\\s");
 		in.useDelimiter(delimiters);	
-		System.out.println("List the cards numbers you wish to discard. > ");
-		System.out.println("(enter each card number followed by a space, or hit enter twice)");
+//		System.out.println("List the cards numbers you wish to discard. > ");
+//		System.out.println("(enter each card number followed by a space, or hit enter twice)");
 		
 		int debug_value = 0;
 		int index_check = 1;
@@ -98,6 +98,7 @@ public class AIPlayer{
 			top_of_deck++;
 		}
 		//reset players hand and sorts it again:
+		System.out.print("\nAfter discarding and drawing cards, AI's hands: ");
 		for(int i = 0; i < 5; i++){
 			ai_hand.get(i).reset_Matching();
 		}
@@ -135,19 +136,19 @@ public class AIPlayer{
 				return special_hands(hand, deck, discardpile);
 			case 2:
 				System.out.println("AI has one pair");
-				System.out.print("AI discarded: ");
+				System.out.print("\nAI discarded: ");
 				ai_discard_draw(hand, deck, discardpile, "3 4 5");
 				System.out.print("\n");
 				return match_total;
 			case 4:
 				System.out.println("AI has two pair");
-				System.out.print("AI discarded: ");
+				System.out.print("\nAI discarded: ");
 				ai_discard_draw(hand, deck, discardpile, "5");
 				System.out.print("\n");
 				return match_total;
 			case 6:
 				System.out.println("AI has three of a kind");
-				System.out.print("AI discarded: ");
+				System.out.print("\nAI discarded: ");
 				ai_discard_draw(hand, deck, discardpile, "4 5");
 				System.out.print("\n");
 				return match_total;
@@ -161,7 +162,7 @@ public class AIPlayer{
 				System.out.println("AI has four of a kind");
 				// just a little modification to the algorithm, if AI has Four of A Kind AND and Ace, no discard occurs
 				if(!hand.get(5).equals('A')){
-					System.out.print("AI discarded: ");
+					System.out.print("\nAI discarded: ");
 					ai_discard_draw(hand, deck, discardpile, "5");
 					System.out.print("\n");
 				}
@@ -203,7 +204,7 @@ public class AIPlayer{
 		else{
 			System.out.print("AI's highest card is: ");
 			hand.get(0).printCard();
-			System.out.print("AI discarded the lowest three cards:");
+			System.out.print("\nAI discarded the lowest three cards:");
 			ai_discard_draw(hand, deck, discardpile, "3 4 5");
 			System.out.print("\n");
 			System.out.println("");
