@@ -26,4 +26,21 @@ public class UserPlayer{
 			                    "discard the other four cards");
 		}
 	}
+	public static void discard_draw(List<Card> player_hand){
+		int numToDiscard = -1;
+		int[] cardsToDiscard = new int[4];
+		
+		Scanner in = new Scanner(System.in);
+		System.out.println("List the cards numbers you wish to discard. > ");
+		while(!in.hasNextInt()){
+			in.next();
+			numToDiscard++;
+			cardsToDiscard[numToDiscard] = in.nextInt();
+			System.out.println("Discarding ");
+			player_hand.get(cardsToDiscard[numToDiscard]).printCard();
+			System.out.print("\n");
+		}
+		
+		
+	}
 }

@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.*;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 public class AIPlayer{
 	
 	static int top_of_deck = 0;
@@ -12,6 +14,8 @@ public class AIPlayer{
 				top_of_deck++;
 		}
 	}
+	
+	
 	public static void print_aihand(List<Card> ai_hand){
 		Card current_card;
 		
@@ -21,7 +25,7 @@ public class AIPlayer{
 			current_card.printCard();
 			
 			//int x = current_card.getValue();
-			System.out.println("(the value of card" + (i+1) + " is: " + current_card.getValue() + ")");
+			//System.out.println("(the value of card" + (i+1) + " is: " + current_card.getValue() + ")");
 		}
 	}
 	
@@ -51,6 +55,8 @@ public class AIPlayer{
 			case 4:
 				hasFour = true;
 				System.out.println("AI has Four of A Kind");
+				// discard the 1 card if it's not an Ace
+				
 				break;
 			default:
 				break;
@@ -61,8 +67,6 @@ public class AIPlayer{
 		}
 		
 	}
-	
-	
 	
 	
 	
