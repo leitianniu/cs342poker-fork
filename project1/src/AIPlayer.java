@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import java.util.regex.Pattern;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
 
@@ -68,7 +69,41 @@ public class AIPlayer{
 		
 	}
 	
-	
+	public static void discard_draw(List<Card> ai_hand, CardPile deck, CardPile discardpile){
+		int numToDiscard = 0;
+		int[] cardsToDiscard = new int[4];
+
+		Scanner in = new Scanner(System.in);
+		Pattern delimiters = Pattern.compile(System.getProperty("line.separator")+"|\\s");
+		in.useDelimiter(delimiters);	
+		System.out.println("List the cards numbers you wish to discard. > ");
+		System.out.println("(enter each card number followed by a space, or hit enter twice)");
+		
+		int debug_value = 0;
+		int index_check = 1;
+		while(in.hasNextInt()){
+			numToDiscard++;
+			cardsToDiscard[numToDiscard-1] = in.nextInt();
+			debug_value = cardsToDiscard[numToDiscard-1] - index_check;
+			ai_hand.get(debug_value).printCard();
+			// remove from hand
+			//ai_hand.remove(cardsToDiscard[numToDiscard] - 1);
+			discardpile.insert_card(ai_hand.remove(debug_value));
+			index_check++;
+		}
+		// draw cards to fill hand
+
+		for(int i=0;i<numToDiscard;i++){
+			ai_hand.add(deck.drawCard());
+			top_of_deck++;
+		}
+		//reset players hand and sorts it again:
+		for(int i = 0; i < 5; i++){
+			ai_hand.get(i).reset_Matching();
+		}
+		handEvaluator.hand_pairing(ai_hand);
+		print_aihand(ai_hand);
+	}
 	
 	// end of class
 }

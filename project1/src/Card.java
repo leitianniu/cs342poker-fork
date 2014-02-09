@@ -53,7 +53,9 @@ public class Card implements Comparable {
 		return matching;
 	}
 
-
+	public void reset_Matching(){
+		matching = 0;
+	}
 
 	private static void init_vlist(){
 		hand_values.add(new Character('0'));
