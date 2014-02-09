@@ -32,9 +32,9 @@ public class UserPlayer{
 	}
 
 	public static void discard_draw(List<Card> player_hand, CardPile deck, CardPile discardpile){
-		num_in_range = true;
 		int numToDiscard = 0;
 		int maxDiscard = 3;
+
 		if(extra_discard == true){
 			maxDiscard = 4;
 		}
@@ -47,14 +47,30 @@ public class UserPlayer{
 		String line = readLine.nextLine();
 		// split the line of input into tokens of integers
 		String[] intTokens = line.split("[^\\d]+");
+
+
 		// DEBUG message
 		System.out.println("There are " + intTokens.length + " ints in the input");
 
+		for(int n=0; n<intTokens.length; n++){
+			if (Integer.parseInt(intTokens[n]) > 5) {
+				num_in_range = false;
+				break;
+			}
+			else{
+				num_in_range = true;
+			}
+		}
+
 		// if the user tries to discard more cards than allowed, keep reading inputs
-		while(line.isEmpty() || (intTokens.length > maxDiscard)){
+		while(line.isEmpty() || (intTokens.length > maxDiscard) || num_in_range == false){
 			if(intTokens.length > maxDiscard){
 				System.out.println("Attempting to discard more than the max number of cards allowed: " + maxDiscard);
 			}
+			if (num_in_range == false) {
+				System.out.println("Input is out of range, please enter only number 1-5");
+			}
+
 			line = readLine.nextLine();
 			if(line.isEmpty()){
 				System.out.println("Input cannot be blank, please enter the cards again");
@@ -62,41 +78,34 @@ public class UserPlayer{
 			}
 			intTokens = line.split("[^\\d]+");
 			System.out.println("There are " + intTokens.length + " ints in the input");
-			if(intTokens.length > maxDiscard){
-				//System.out.println("Attempting to discard more than the max number of cards allowed: " + maxDiscard);
-				continue;
-			}
-			
-			// now that we have the correct amount of cards to discard, we sort the input
-			numToDiscard = intTokens.length;
-			Arrays.sort(intTokens);
-			// then convert the ints from string to int
-			sorted = new int[intTokens.length];
-			for(int k=0;k<intTokens.length;k++){
-				try {
-					sorted[k] = Integer.parseInt(intTokens[k]);
-			    } catch (NumberFormatException nfe) {};
-			}
-			
-			// test to see if any number is out of range, either <1 or >5
-			for(int n=0;n<intTokens.length;n++){
-				if ((sorted[n]<1)||(sorted[n]>5)) {
+
+			for(int n=0; n<intTokens.length; n++){
+				if (Integer.parseInt(intTokens[n]) > 5) {
 					num_in_range = false;
 					break;
 				}
-				else {
+				else{
 					num_in_range = true;
 				}
 			}
-			
-			if (num_in_range == false) {
-				System.out.println("Input is out of range, please enter only number 1-5");
-				continue;
-			}
-			
-			// test to see the int array
-			System.out.println("The sorted line of input is" + Arrays.toString(sorted));
+
+
 		}
+			
+		// now that we have the correct amount of cards to discard, we sort the input
+		numToDiscard = intTokens.length;
+		Arrays.sort(intTokens);
+		// then convert the ints from string to int
+		sorted = new int[intTokens.length];
+		for(int k=0;k<intTokens.length;k++){
+			try {
+				sorted[k] = Integer.parseInt(intTokens[k]);
+			    } catch (NumberFormatException nfe) {};
+		}
+			
+		// test to see the int array
+		System.out.println("The sorted line of input is" + Arrays.toString(sorted));
+		
 		
 		int debug_value = 0;
 		int index_check = 1;
@@ -121,6 +130,5 @@ public class UserPlayer{
 		}
 		handEvaluator.hand_pairing(player_hand);
 		print_phand(player_hand);
-
 	}
 }

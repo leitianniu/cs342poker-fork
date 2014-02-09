@@ -75,8 +75,8 @@ public class main{
         // Evaluate AI hands
 //   		rankOfHands.hand_pairing(ai_hand);
 //   		AIPlayer.checkpairs(ai_hand);
-		AIHandEvaluator.hand_pairing(ai_hand);
-		AIHandEvaluator.hand_calculator(ai_hand);
+		AIPlayer.hand_pairing(ai_hand);
+		AIPlayer.ai_hand_handler(ai_hand, deck, discardpile);
 
      	// Player Discard card
    		UserPlayer.discard_draw(player_hand, deck, discardpile);
