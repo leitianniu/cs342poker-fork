@@ -9,12 +9,12 @@ public class main{
 		
 		System.out.println("Hello welcome to 5 Card Poker.");
 		System.out.println("How many computer opponents do you want to face (0-3 only)? ");
-		/*int opponents = Integer.parseInt(scanner.nextLine());
-
-		while(opponents < 0 || opponents >= 4){
-			System.out.println("Value out of bounds please enter a new value: ");
-			opponents = Integer.parseInt(scanner.nextLine());
-		}*/
+//		int opponents = Integer.parseInt(scanner.nextLine());
+//
+//		while(opponents < 0 || opponents >= 4){
+//			System.out.println("Value out of bounds please enter a new value: ");
+//			opponents = Integer.parseInt(scanner.nextLine());
+//		}
 
 		System.out.println("The deck is being shuffled...");
 		CardPile discardpile = new CardPile();
@@ -57,7 +57,15 @@ public class main{
 		// Sort AI hand
         Collections.sort(ai_hand);
 
+        // For DEBUG purposes, let's peek at the AI's hand
+		System.out.print("\n\nThe cards in AI's hand are:");
+		AIPlayer.hand_pairing(ai_hand);
+        AIPlayer.print_aihand(ai_hand);
+        System.out.println("\n");
         
+        // Evaluate AI hands
+		//AIPlayer.hand_pairing(ai_hand);
+		AIPlayer.ai_hand_handler(ai_hand, deck, discardpile);
         
 		// print player cards
         UserPlayer.print_phand(player_hand);
@@ -66,17 +74,6 @@ public class main{
 		handEvaluator.hand_pairing(player_hand);
 		handEvaluator.hand_calculator(player_hand);
         
-        
-        // For DEBUG purposes, let's peek at the AI's hand
-		System.out.print("\n\nThe cards in AI's hand are:");
-        AIPlayer.print_aihand(ai_hand);
-        System.out.println("\n");
-        
-        // Evaluate AI hands
-//   		rankOfHands.hand_pairing(ai_hand);
-//   		AIPlayer.checkpairs(ai_hand);
-		AIPlayer.hand_pairing(ai_hand);
-		AIPlayer.ai_hand_handler(ai_hand, deck, discardpile);
 
      	// Player Discard card
    		UserPlayer.discard_draw(player_hand, deck, discardpile);
