@@ -69,7 +69,7 @@ public class AIPlayer{
 		
 	}
 	
-	public static void discard_draw(List<Card> ai_hand, CardPile deck, CardPile discardpile){
+	public static void ai_discard_draw(List<Card> ai_hand, CardPile deck, CardPile discardpile){
 		int numToDiscard = 0;
 		int[] cardsToDiscard = new int[4];
 

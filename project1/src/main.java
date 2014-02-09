@@ -46,8 +46,9 @@ public class main{
 		// Deal to Player
 		List<Card> player_hand = new ArrayList<>();
 		UserPlayer.initiate_hand(player_hand, deck);
-
+		// sort player hand
         Collections.sort(player_hand);
+
         
 		// Deal to AI (currently only 1 AI)
 		// ToDo: Do a switch case with number of CPUs as the case numbers
@@ -56,22 +57,26 @@ public class main{
 		// Sort AI hand
         Collections.sort(ai_hand);
 
+        
+        
 		// print player cards
-		System.out.print("The cards in your hand are:");
         UserPlayer.print_phand(player_hand);
-        System.out.println("\n");
+
         // evaluate player cards
-        rankOfHands.hand_pairing(player_hand);
+		handEvaluator.hand_pairing(player_hand);
+		handEvaluator.hand_calculator(player_hand);
         
         
         // For DEBUG purposes, let's peek at the AI's hand
-		System.out.print("The cards in AI's hand are:");
+		System.out.print("\n\nThe cards in AI's hand are:");
         AIPlayer.print_aihand(ai_hand);
         System.out.println("\n");
         
         // Evaluate AI hands
-   		rankOfHands.hand_pairing(ai_hand);
-   		AIPlayer.checkpairs(ai_hand);
+//   		rankOfHands.hand_pairing(ai_hand);
+//   		AIPlayer.checkpairs(ai_hand);
+		AIHandEvaluator.hand_pairing(ai_hand);
+		AIHandEvaluator.hand_calculator(ai_hand);
 
      	// Player Discard card
    		UserPlayer.discard_draw(player_hand, deck, discardpile);

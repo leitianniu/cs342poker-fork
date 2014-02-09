@@ -35,7 +35,7 @@ public class handEvaluator{
 				System.out.println("You have one pair");
 				return match_total;
 			case 4:
-				System.out.println("You have two pair");
+				System.out.println("You have two pairs");
 				return match_total;
 			case 6:
 				System.out.println("You have three of a kind");
