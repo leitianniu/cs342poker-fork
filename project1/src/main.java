@@ -6,20 +6,20 @@ import java.util.*;
 public class main{
 	public static void main(String[] args){
 		Scanner scanner = new Scanner(System.in);
-		
+
 		System.out.println("Hello welcome to 5 Card Poker.");
 		System.out.println("How many computer opponents do you want to face (0-3 only)? ");
-		/*int opponents = Integer.parseInt(scanner.nextLine());
-
-		while(opponents < 0 || opponents >= 4){
-			System.out.println("Value out of bounds please enter a new value: ");
-			opponents = Integer.parseInt(scanner.nextLine());
-		}*/
+		//		int opponents = Integer.parseInt(scanner.nextLine());
+		//
+		//		while(opponents < 0 || opponents >= 4){
+		//			System.out.println("Value out of bounds please enter a new value: ");
+		//			opponents = Integer.parseInt(scanner.nextLine());
+		//		}
 
 		System.out.println("The deck is being shuffled...");
 		CardPile discardpile = new CardPile();
 		CardPile deck = new CardPile(true);
-		
+
 
 		//deck.PilePrint();
 
@@ -47,46 +47,43 @@ public class main{
 		List<Card> player_hand = new ArrayList<>();
 		UserPlayer.initiate_hand(player_hand, deck);
 		// sort player hand
-        Collections.sort(player_hand);
+		Collections.sort(player_hand);
 
-        
+
 		// Deal to AI (currently only 1 AI)
 		// ToDo: Do a switch case with number of CPUs as the case numbers
 		List<Card> ai_hand = new ArrayList<>();
 		AIPlayer.initiate_hand(ai_hand, deck); 
 		// Sort AI hand
-        Collections.sort(ai_hand);
+		Collections.sort(ai_hand);
 
-        
-        
-		// print player cards
-        UserPlayer.print_phand(player_hand);
-
-        // evaluate player cards
-		handEvaluator.hand_pairing(player_hand);
-		handEvaluator.hand_calculator(player_hand);
-        
-        
-        // For DEBUG purposes, let's peek at the AI's hand
+		// For DEBUG purposes, let's peek at the AI's hand
 		System.out.print("\n\nThe cards in AI's hand are:");
-        AIPlayer.print_aihand(ai_hand);
-        System.out.println("\n");
-        
-        // Evaluate AI hands
-//   		rankOfHands.hand_pairing(ai_hand);
-//   		AIPlayer.checkpairs(ai_hand);
 		AIPlayer.hand_pairing(ai_hand);
+		AIPlayer.print_aihand(ai_hand);
+		System.out.println("\n");
+
+		// Evaluate AI hands
+		//AIPlayer.hand_pairing(ai_hand);
 		AIPlayer.ai_hand_handler(ai_hand, deck, discardpile);
 
-     	// Player Discard card
-   		UserPlayer.discard_draw(player_hand, deck, discardpile);
-   		
-   		
-        //int ans = 'A' + 'K' + 'Q' + 'J' + 'T' = 379;
- 
-        //System.out.println("Value: " + ans);
+		// print player cards
+		UserPlayer.print_phand(player_hand);
 
-        //String username = scanner.nextLine();
+		// evaluate player cards
+		handEvaluator.hand_pairing(player_hand);
+		handEvaluator.hand_calculator(player_hand);
+
+
+		// Player Discard card
+		UserPlayer.discard_draw(player_hand, deck, discardpile);
+
+
+		//int ans = 'A' + 'K' + 'Q' + 'J' + 'T' = 379;
+
+		//System.out.println("Value: " + ans);
+
+		//String username = scanner.nextLine();
 
 
 		System.exit(0);

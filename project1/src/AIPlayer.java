@@ -206,6 +206,9 @@ public class AIPlayer{
 			hand.get(0).printCard();
 			System.out.print("\nAI discarded the lowest three cards:");
 			ai_discard_draw(hand, deck, discardpile, "3 4 5");
+			if(hand.get(0).equals("A")){
+				ai_discard_draw(hand, deck, discardpile, "2 3 4 5");
+			}
 			System.out.print("\n");
 			System.out.println("");
 			return 0;

@@ -3,7 +3,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class UserPlayer{
-
+	
 	static int top_of_deck = 0;
 	static boolean extra_discard = false;
 	static boolean num_in_range = false;
@@ -27,20 +27,20 @@ public class UserPlayer{
 		System.out.println("\n");
 		if(extra_discard == true){
 			System.out.println("Since you have an Ace you can keep the Ace and " +
-					"discard the other four cards.");
+			                    "discard the other four cards.\n");
 		}
 	}
 
 	public static void discard_draw(List<Card> player_hand, CardPile deck, CardPile discardpile){
 		int numToDiscard = 0;
 		int maxDiscard = 3;
-
+		int temp;
 		if(extra_discard == true){
 			maxDiscard = 4;
 		}
 
-		System.out.println("List the cards numbers you wish to discard. > ");
-		System.out.println("(enter each card number followed by a space, or hit enter twice)");
+		System.out.println("List the cards numbers you wish to discard. No negative numbers please! > ");
+		System.out.println("(enter each card number followed by a space, or hit enter twice.)");
 		
 		// read a line of input
 		Scanner readLine = new Scanner(System.in);
@@ -48,12 +48,12 @@ public class UserPlayer{
 		// split the line of input into tokens of integers
 		String[] intTokens = line.split("[^\\d]+");
 
-
 		// DEBUG message
-		System.out.println("There are " + intTokens.length + " ints in the input");
+		//System.out.println("There are " + intTokens.length + " ints in the input");
 
 		for(int n=0; n<intTokens.length; n++){
-			if (Integer.parseInt(intTokens[n]) > 5) {
+			temp = Integer.parseInt(intTokens[n]);
+			if (temp > 5 || temp < 1) {
 				num_in_range = false;
 				break;
 			}
@@ -80,7 +80,8 @@ public class UserPlayer{
 			System.out.println("There are " + intTokens.length + " ints in the input");
 
 			for(int n=0; n<intTokens.length; n++){
-				if (Integer.parseInt(intTokens[n]) > 5) {
+				temp = Integer.parseInt(intTokens[n]);
+				if (temp > 5 || temp < 0) {
 					num_in_range = false;
 					break;
 				}
@@ -104,7 +105,7 @@ public class UserPlayer{
 		}
 			
 		// test to see the int array
-		System.out.println("The sorted line of input is" + Arrays.toString(sorted));
+		//System.out.println("The sorted line of input is" + Arrays.toString(sorted));
 		
 		
 		int debug_value = 0;
@@ -130,5 +131,9 @@ public class UserPlayer{
 		}
 		handEvaluator.hand_pairing(player_hand);
 		print_phand(player_hand);
+
 	}
 }
+
+
+	
